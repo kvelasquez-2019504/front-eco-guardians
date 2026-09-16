@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router'
 import { Menu } from 'lucide-react'
-import { Sidebar } from '../organisms/Sidebar.jsx'
+import { Sidebar } from '@/components/organisms/Sidebar.jsx'
 
 /**
  * Plantilla: DashboardLayout
