@@ -67,7 +67,7 @@ export const RegisterForm = ({ onSuccess }) => {
   }
 
   return (
-    <div className="w-full max-w-lg bg-eco-card border border-eco-border rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6 select-none">
+    <div className="w-full max-w-lg bg-eco-card border border-eco-border rounded-2xl p-6 sm:p-8 space-y-6 select-none">
       {/* Encabezado del Formulario */}
       <div className="text-center space-y-1.5">
         <span className="text-3xl block" role="img" aria-label="Semilla">🌱</span>

@@ -1,5 +1,5 @@
 /**
- * Validadores puros para el formulario de registro de usuario
+ * Validadores puros para autenticación y usuarios
  * Cumplen con las restricciones de la especificación técnica de la API.
  */
 
@@ -34,6 +34,13 @@ export const validatePassword = (password) => {
   }
   if (password.length < 6) {
     return 'La contraseña debe tener una longitud mínima de 6 caracteres.'
+  }
+  return true
+}
+
+export const validateLoginPassword = (password) => {
+  if (!password || password.trim().length === 0) {
+    return 'La contraseña es requerida.'
   }
   return true
 }

@@ -1,10 +1,16 @@
+import { AuthLayout } from '@/components/templates/AuthLayout.jsx'
 import { RegisterForm } from '@/components/organisms/RegisterForm.jsx'
+import registerBg from '@/assets/bg-eco-guardianes-register.jpg'
 
+/**
+ * Página: RegisterPage
+ * Vista de registro público con imagen de fondo institucional y organismo RegisterForm.
+ */
 export const RegisterPage = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-eco-bg">
+    <AuthLayout bgImage={registerBg}>
       <RegisterForm />
-    </div>
+    </AuthLayout>
   )
 }
 

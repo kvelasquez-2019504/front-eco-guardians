@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 /**
  * Tienda de autenticación global (Zustand)
- * Gestiona el usuario activo, rol, nivel de Eco-Aura y función de logout.
+ * Gestiona el usuario activo, token JWT, rol, nivel de Eco-Aura y función de logout.
  */
 export const useAuthStore = create((set) => ({
   user: {
@@ -15,19 +15,29 @@ export const useAuthStore = create((set) => ({
       level: 'GUARDIAN', // 'NOVATO' | 'GUARDIAN' | 'LEYENDA'
     },
   },
+  token: localStorage.getItem('token') || null,
 
-  // Acción para cambiar de rol interactivamente (ideal para pruebas y demos de RBAC)
+  // Guardar sesión tras login exitoso
+  setAuth: (user, token) => {
+    if (token) {
+      localStorage.setItem('token', token)
+    }
+    set({ user, token: token || null })
+  },
+
+  // Acción para cambiar de rol interactivamente (para pruebas de RBAC)
   setRole: (newRole) =>
     set((state) => ({
       user: state.user ? { ...state.user, role: newRole } : null,
     })),
 
-  // Acción para actualizar usuario
+  // Acción para actualizar datos de usuario
   setUser: (user) => set({ user }),
 
-  // Cierre de sesión y limpieza de estado
+  // Cierre de sesión y limpieza de estado y almacenamiento local
   logout: () => {
-    set({ user: null })
+    localStorage.removeItem('token')
+    set({ user: null, token: null })
   },
 }))
 

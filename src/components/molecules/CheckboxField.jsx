@@ -27,7 +27,7 @@ export const CheckboxField = ({
 
   return (
     <div className={`flex flex-col gap-1 ${className}`}>
-      <div className="flex items-start gap-3">
+      <div className="flex items-center gap-3 ">
         <div className="pt-0.5">
           <Checkbox
             id={inputId}
