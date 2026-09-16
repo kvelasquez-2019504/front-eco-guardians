@@ -3,6 +3,7 @@ import { DashboardHomePage } from '@/pages/DashboardHomePage.jsx'
 import { UsersPage } from '@/pages/admin/UsersPage.jsx'
 import { LevelsPage } from '@/pages/admin/LevelsPage.jsx'
 import { CareersPage } from '@/pages/admin/CareersPage.jsx'
+import { CoordinatorsPage } from '@/pages/admin/CoordinatorsPage.jsx'
 import { LoginPage } from '@/pages/LoginPage.jsx'
 import { RegisterPage } from '@/pages/RegisterPage.jsx'
 import { ProtectedRoute } from './ProtectedRoute.jsx'
@@ -32,6 +33,10 @@ export const routes = [
           {
             path: 'admin/careers',
             element: <CareersPage />,
+          },
+          {
+            path: 'admin/coordinators',
+            element: <CoordinatorsPage />,
           },
         ],
       },
