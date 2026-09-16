@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     // Verificación única de sesión al arrancar la aplicación
     checkAuthSession()
-  }, []);
+  }, [checkAuthSession])
 
   return (
     <>

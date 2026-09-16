@@ -1,7 +1,9 @@
-import { DashboardLayout } from '../components/templates/DashboardLayout.jsx'
-import { DemoDashboardPage } from '../pages/DemoDashboardPage.jsx'
-import { LoginPage } from '../pages/LoginPage.jsx'
-import { RegisterPage } from '../pages/RegisterPage.jsx'
+import { DashboardLayout } from '@/components/templates/DashboardLayout.jsx'
+import { DashboardHomePage } from '@/pages/DashboardHomePage.jsx'
+import { UsersPage } from '@/pages/admin/UsersPage.jsx'
+import { LevelsPage } from '@/pages/admin/LevelsPage.jsx'
+import { LoginPage } from '@/pages/LoginPage.jsx'
+import { RegisterPage } from '@/pages/RegisterPage.jsx'
 import { ProtectedRoute } from './ProtectedRoute.jsx'
 import { PublicRoute } from './PublicRoute.jsx'
 
@@ -16,18 +18,22 @@ export const routes = [
         children: [
           {
             index: true,
-            element: <DemoDashboardPage />,
+            element: <DashboardHomePage />,
           },
           {
-            path: ':section/*',
-            element: <DemoDashboardPage />,
+            path: 'admin/users',
+            element: <UsersPage />,
+          },
+          {
+            path: 'admin/levels',
+            element: <LevelsPage />,
           },
         ],
       },
     ],
   },
 
-  // 2. Rutas Públicas: Si el usuario ya está autenticado, no le permite entrar y lo envía a '/'
+  // 2. Rutas Públicas: Redirigen a '/' si ya existe sesión activa
   {
     element: <PublicRoute />,
     children: [
@@ -42,3 +48,5 @@ export const routes = [
     ],
   },
 ]
+
+export default routes

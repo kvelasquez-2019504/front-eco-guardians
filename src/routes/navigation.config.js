@@ -193,14 +193,14 @@ export const navigationConfig = [
     id: 'system-module',
     title: 'Sistema',
     icon: Settings,
-    allowedRoles: ['ADMIN'],
+    allowedRoles: ['ADMIN', 'COORDINATOR'],
     items: [
       {
         id: 'users',
         label: 'Usuarios',
         path: '/admin/users',
         icon: Users,
-        allowedRoles: ['ADMIN'],
+        allowedRoles: ['ADMIN', 'COORDINATOR'],
       },
     ],
   },

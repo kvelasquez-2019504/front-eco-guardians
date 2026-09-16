@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router'
 import { toast } from 'sonner'
 import { login as loginRequest, renewToken as renewRequest } from '@/service/auth.api.js'
@@ -83,7 +83,7 @@ export const useAuth = () => {
    * Se ejecuta una sola vez al cargar la aplicación.
    * NO redirige forzosamente ni lanza toasts molestos si el token expiró.
    */
-  const checkAuthSession = async () => {
+  const checkAuthSession = useCallback(async () => {
     const storedToken = localStorage.getItem('token')
 
     // Si no hay token guardado, marcamos como no autenticado inmediatamente
@@ -111,7 +111,7 @@ export const useAuth = () => {
       success: true,
       user: sessionUser,
     }
-  }
+  }, [setAuth, setUnauthenticated])
 
   return {
     loginUser,

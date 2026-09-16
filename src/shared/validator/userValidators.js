@@ -1,3 +1,5 @@
+import { USER_ROLES } from '@/service/user.api.js'
+
 /**
  * Validadores puros para autenticación y usuarios
  * Cumplen con las restricciones de la especificación técnica de la API.
@@ -51,6 +53,52 @@ export const validateConfirmPassword = (confirmPassword, originalPassword) => {
   }
   if (confirmPassword !== originalPassword) {
     return 'Las contraseñas no coinciden.'
+  }
+  return true
+}
+
+/**
+ * Validadores para edición administrativa de usuarios (PUT /user/:id)
+ * Todos los campos son opcionales en el envío, pero si se proporcionan deben cumplir las reglas.
+ */
+export const validateEditName = (name) => {
+  if (!name || name.trim().length === 0) return true
+  const trimmed = name.trim()
+  if (trimmed.length < 2 || trimmed.length > 50) {
+    return 'El nombre debe tener entre 2 y 50 caracteres.'
+  }
+  const lettersOnlyRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/
+  if (!lettersOnlyRegex.test(trimmed)) {
+    return 'El nombre solo puede contener letras y espacios.'
+  }
+  return true
+}
+
+export const validateEditLastName = (lastName) => {
+  if (!lastName || lastName.trim().length === 0) return true
+  const trimmed = lastName.trim()
+  if (trimmed.length < 2 || trimmed.length > 50) {
+    return 'El apellido debe tener entre 2 y 50 caracteres.'
+  }
+  const lettersOnlyRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/
+  if (!lettersOnlyRegex.test(trimmed)) {
+    return 'El apellido solo puede contener letras y espacios.'
+  }
+  return true
+}
+
+export const validateEditPassword = (password) => {
+  if (!password || password.length === 0) return true
+  if (password.length < 8) {
+    return 'Si actualizas la contraseña, debe tener al menos 8 caracteres.'
+  }
+  return true
+}
+
+export const validateEditRole = (role) => {
+  if (!role) return true
+  if (!USER_ROLES.includes(role)) {
+    return `El rol debe ser uno de: ${USER_ROLES.join(', ')}.`
   }
   return true
 }
