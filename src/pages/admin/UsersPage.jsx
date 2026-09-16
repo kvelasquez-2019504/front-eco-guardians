@@ -1,7 +1,6 @@
-import { Shield, UserCheck, UserX, UserPlus } from 'lucide-react'
+import { Shield, UserCheck, UserX } from 'lucide-react'
 import { useUsersAdmin } from '@/shared/hooks/useUsersAdmin.js'
 import { H1 } from '@/components/atoms/Heading.jsx'
-import { Button } from '@/components/atoms/Button.jsx'
 import { UserFilterBar } from '@/components/molecules/UserFilterBar.jsx'
 import { UsersTable } from '@/components/organisms/UsersTable.jsx'
 import { UserCreateModal } from '@/components/organisms/UserCreateModal.jsx'
@@ -100,18 +99,6 @@ export const UsersPage = () => {
                 </span>
               </div>
             </div>
-
-            {/* Botón Nuevo Usuario en cabecera */}
-            <Button
-              type="button"
-              variant="primary"
-              size="md"
-              leftIcon={<UserPlus size={16} />}
-              onClick={openCreateModal}
-              className="shadow-lg shadow-eco-green/20 whitespace-nowrap"
-            >
-              Nuevo Usuario
-            </Button>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { DashboardLayout } from '@/components/templates/DashboardLayout.jsx'
 import { DashboardHomePage } from '@/pages/DashboardHomePage.jsx'
 import { UsersPage } from '@/pages/admin/UsersPage.jsx'
 import { LevelsPage } from '@/pages/admin/LevelsPage.jsx'
+import { CareersPage } from '@/pages/admin/CareersPage.jsx'
 import { LoginPage } from '@/pages/LoginPage.jsx'
 import { RegisterPage } from '@/pages/RegisterPage.jsx'
 import { ProtectedRoute } from './ProtectedRoute.jsx'
@@ -27,6 +28,10 @@ export const routes = [
           {
             path: 'admin/levels',
             element: <LevelsPage />,
+          },
+          {
+            path: 'admin/careers',
+            element: <CareersPage />,
           },
         ],
       },

@@ -1,7 +1,6 @@
-import { School, BookOpen, GraduationCap, Plus, Sparkles } from 'lucide-react'
+import { School, BookOpen, GraduationCap } from 'lucide-react'
 import { useLevelsAdmin } from '@/shared/hooks/useLevelsAdmin.js'
 import { H1 } from '@/components/atoms/Heading.jsx'
-import { Button } from '@/components/atoms/Button.jsx'
 import { LevelFilterBar } from '@/components/molecules/LevelFilterBar.jsx'
 import { LevelsTable } from '@/components/organisms/LevelsTable.jsx'
 import { LevelCreateModal } from '@/components/organisms/LevelCreateModal.jsx'
@@ -106,37 +105,6 @@ export const LevelsPage = () => {
                 </span>
               </div>
             </div>
-
-            {/* Acciones de cabecera para ADMIN */}
-            {isAdmin && (
-              <div className="flex items-center gap-2">
-                {/* Botón Seed */}
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="md"
-                  onClick={handleSeedLevels}
-                  disabled={seedLoading || loading}
-                  isLoading={seedLoading}
-                  leftIcon={!seedLoading ? <Sparkles size={16} className="text-eco-star" /> : null}
-                  title="Poblar automáticamente grados y secciones oficiales de Kinal"
-                >
-                  Sembrar Grados
-                </Button>
-
-                {/* Botón Nuevo Nivel */}
-                <Button
-                  type="button"
-                  variant="primary"
-                  size="md"
-                  leftIcon={<Plus size={16} />}
-                  onClick={openCreateModal}
-                  className="shadow-lg shadow-eco-green/20 whitespace-nowrap"
-                >
-                  Nuevo Nivel
-                </Button>
-              </div>
-            )}
           </div>
         </div>
       </div>
