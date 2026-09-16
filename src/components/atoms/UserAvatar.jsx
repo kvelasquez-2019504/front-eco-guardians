@@ -14,7 +14,7 @@ export const UserAvatar = ({
   size = 'md',
   className = '',
 }) => {
-  // Extraer iniciales (ej: Kenneth Velásquez -> KV)
+  // Extraer iniciales (ej: Pepito Atunio -> PA)
   const firstInitial = name.trim().charAt(0).toUpperCase()
   const secondInitial = lastName.trim().charAt(0).toUpperCase()
   const initials = `${firstInitial}${secondInitial}` || 'EG'

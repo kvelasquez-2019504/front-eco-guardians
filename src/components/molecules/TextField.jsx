@@ -48,11 +48,11 @@ export const TextField = ({
       />
 
       {error ? (
-        <p className="text-xs text-red-400 font-body flex items-center gap-1 mt-0.5" role="alert">
-          <span>⚠️</span> {error}
+        <p className="text-sm text-red-400 font-body flex items-center gap-1 mt-0.5" role="alert">
+          {error}
         </p>
       ) : helperText ? (
-        <p className="text-xs text-eco-muted font-body mt-0.5">
+        <p className="text-sm text-eco-muted font-body mt-0.5">
           {helperText}
         </p>
       ) : null}

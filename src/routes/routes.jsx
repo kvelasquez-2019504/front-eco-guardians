@@ -1,6 +1,7 @@
 import { DashboardLayout } from '../components/templates/DashboardLayout.jsx'
 import { DemoDashboardPage } from '../pages/DemoDashboardPage.jsx'
 import { LoginPage } from '../pages/LoginPage.jsx'
+import { RegisterPage } from '../pages/RegisterPage.jsx'
 
 export const routes = [
   {
@@ -21,5 +22,9 @@ export const routes = [
   {
     path: '/login',
     element: <LoginPage />,
+  },
+  {
+    path: '/register',
+    element: <RegisterPage />,
   },
 ]

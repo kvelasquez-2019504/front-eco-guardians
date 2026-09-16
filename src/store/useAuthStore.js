@@ -7,8 +7,8 @@ import { create } from 'zustand'
 export const useAuthStore = create((set) => ({
   user: {
     uid: 'kinal-2026-001',
-    name: 'Kenneth',
-    lastName: 'Velásquez',
+    name: 'Pepito',
+    lastName: 'Atunio',
     role: 'STUDENT', // Roles posibles: 'ADMIN' | 'COORDINATOR' | 'TEACHER' | 'STUDENT'
     ecoAura: {
       points: 1250,
