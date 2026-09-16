@@ -5,6 +5,7 @@ import { LevelsPage } from '@/pages/admin/LevelsPage.jsx'
 import { CareersPage } from '@/pages/admin/CareersPage.jsx'
 import { CoordinatorsPage } from '@/pages/admin/CoordinatorsPage.jsx'
 import { ClassesPage } from '@/pages/admin/ClassesPage.jsx'
+import { EnrollmentPage } from '@/pages/admin/EnrollmentPage.jsx'
 import { LoginPage } from '@/pages/LoginPage.jsx'
 import { RegisterPage } from '@/pages/RegisterPage.jsx'
 import { ProtectedRoute } from './ProtectedRoute.jsx'
@@ -46,6 +47,10 @@ export const routes = [
           {
             path: 'teacher/classes',
             element: <ClassesPage />,
+          },
+          {
+            path: 'admin/enrollment',
+            element: <EnrollmentPage />,
           },
         ],
       },
