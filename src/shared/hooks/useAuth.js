@@ -1,23 +1,27 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { toast } from 'sonner'
-import { login as loginRequest } from '@/service/auth.api.js'
+import { login as loginRequest, renewToken as renewRequest } from '@/service/auth.api.js'
 import { useAuthStore } from '@/store/useAuthStore.js'
 
 /**
  * Custom Hook: useAuth
- * Orquesta el flujo de autenticación: LoginForm -> useAuth -> auth.api -> useAuthStore
+ * Centraliza la lógica de inicio de sesión y renovación silenciosa de token.
  */
 export const useAuth = () => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+
+  const user = useAuthStore((state) => state.user)
+  const token = useAuthStore((state) => state.token)
+  const status = useAuthStore((state) => state.status)
   const setAuth = useAuthStore((state) => state.setAuth)
+  const setUnauthenticated = useAuthStore((state) => state.setUnauthenticated)
 
   /**
    * Iniciar sesión con email y password
    * @param {Object} credentials - { email, password }
    * @param {Object} [options] - Opciones adicionales (redirección)
-   * @returns {Promise<{ success: boolean, data?: any, errorData?: any }>}
    */
   const loginUser = async (credentials, options = {}) => {
     setLoading(true)
@@ -57,11 +61,11 @@ export const useAuth = () => {
     setLoading(false)
 
     const responseData = response.data
-    const token = responseData?.token
-    const user = responseData?.user
+    const newToken = responseData?.token
+    const newUser = responseData?.user
 
     // Guardar usuario y token en Zustand y localStorage
-    setAuth(user, token)
+    setAuth(newUser, newToken)
 
     toast.success('¡Bienvenido de nuevo a Eco-Guardianes! 🌿')
 
@@ -74,9 +78,48 @@ export const useAuth = () => {
     }
   }
 
+  /**
+   * Renovación y verificación silenciosa de token JWT
+   * Se ejecuta una sola vez al cargar la aplicación.
+   * NO redirige forzosamente ni lanza toasts molestos si el token expiró.
+   */
+  const checkAuthSession = async () => {
+    const storedToken = localStorage.getItem('token')
+
+    // Si no hay token guardado, marcamos como no autenticado inmediatamente
+    if (!storedToken) {
+      setUnauthenticated()
+      return { success: false }
+    }
+
+    const response = await renewRequest()
+
+    // Si el token es inválido o expiró
+    if (response.error) {
+      setUnauthenticated()
+      return { success: false }
+    }
+
+    const responseData = response.data
+    const renewedToken = responseData?.token || storedToken
+    const sessionUser = responseData?.user
+
+    // Sesión válida: actualizar usuario y nuevo token
+    setAuth(sessionUser, renewedToken)
+
+    return {
+      success: true,
+      user: sessionUser,
+    }
+  }
+
   return {
     loginUser,
+    checkAuthSession,
     loading,
+    user,
+    token,
+    status,
   }
 }
 

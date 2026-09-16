@@ -20,8 +20,7 @@ export const Sidebar = ({ onClose, className = '' }) => {
   const navigate = useNavigate()
   const user = useAuthStore((state) => state.user)
   const logout = useAuthStore((state) => state.logout)
-
-  const currentRole = user?.role || 'STUDENT'
+  const currentRole = user?.role
 
   // 1. Filtrado Estricto por Roles (RBAC):
   // Solo se conservan grupos que tengan al menos 1 sub-item permitido para el rol del usuario.

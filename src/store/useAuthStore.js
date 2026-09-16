@@ -2,42 +2,55 @@ import { create } from 'zustand'
 
 /**
  * Tienda de autenticación global (Zustand)
- * Gestiona el usuario activo, token JWT, rol, nivel de Eco-Aura y función de logout.
+ * Gestiona el usuario activo, token JWT, estado del ciclo de vida de la sesión (status) y logout.
  */
-export const useAuthStore = create((set) => ({
-  user: {
-    uid: 'kinal-2026-001',
-    name: 'Pepito',
-    lastName: 'Atunio',
-    role: 'STUDENT', // Roles posibles: 'ADMIN' | 'COORDINATOR' | 'TEACHER' | 'STUDENT'
-    ecoAura: {
-      points: 1250,
-      level: 'GUARDIAN', // 'NOVATO' | 'GUARDIAN' | 'LEYENDA'
-    },
-  },
-  token: localStorage.getItem('token') || null,
+const initialToken = localStorage.getItem('token')
 
-  // Guardar sesión tras login exitoso
+export const useAuthStore = create((set) => ({
+  user: null,
+  token: initialToken || null,
+  // 'checking': verificando sesión en arranque | 'authenticated': logueado | 'unauthenticated': no logueado
+  status: initialToken ? 'checking' : 'unauthenticated',
+
+  // Establecer sesión autenticada tras login o renovación exitosa
   setAuth: (user, token) => {
     if (token) {
       localStorage.setItem('token', token)
     }
-    set({ user, token: token || null })
+    set({
+      user,
+      token: token || null,
+      status: 'authenticated',
+    })
   },
 
-  // Acción para cambiar de rol interactivamente (para pruebas de RBAC)
+  // Marcar como no autenticado (sin sesión o token expirado)
+  setUnauthenticated: () => {
+    localStorage.removeItem('token')
+    set({
+      user: null,
+      token: null,
+      status: 'unauthenticated',
+    })
+  },
+
+  // Acción para cambiar de rol interactivamente (para pruebas de simulador RBAC)
   setRole: (newRole) =>
     set((state) => ({
       user: state.user ? { ...state.user, role: newRole } : null,
     })),
 
-  // Acción para actualizar datos de usuario
+  // Actualizar datos del usuario
   setUser: (user) => set({ user }),
 
-  // Cierre de sesión y limpieza de estado y almacenamiento local
+  // Cierre de sesión voluntario
   logout: () => {
     localStorage.removeItem('token')
-    set({ user: null, token: null })
+    set({
+      user: null,
+      token: null,
+      status: 'unauthenticated',
+    })
   },
 }))
 

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { toast } from 'sonner'
 import { postUser as postUserRequest } from '@/service/user.api.js'
-import { useAuthStore } from '@/store/useAuthStore.js'
 
 /**
  * Custom Hook: useUser
@@ -12,7 +11,6 @@ import { useAuthStore } from '@/store/useAuthStore.js'
 export const useUser = () => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-  const setUser = useAuthStore((state) => state.setUser)
 
   /**
    * Registro de un nuevo usuario
@@ -61,11 +59,6 @@ export const useUser = () => {
     // Éxito: Notificación visual con Sonner
     const successMsg = response.data?.msg || response.data?.message || '¡Cuenta de Eco-Guardián creada con éxito!'
     toast.success(successMsg)
-
-    // Si el backend devuelve el usuario creado o token, se actualiza Zustand
-    if (response.data?.user) {
-      setUser(response.data.user)
-    }
 
     // Redirección si se solicita o por defecto al login
     if (options.redirectTo !== null) {
