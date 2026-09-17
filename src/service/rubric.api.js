@@ -55,20 +55,6 @@ export const createCriterion = async (criterionData) => {
   }
 }
 
-/**
- * Inicializar criterios institucionales por defecto de Fundación Kinal (Exclusivo ADMIN)
- * @returns {Promise<any>}
- */
-export const seedRubricCriteria = async () => {
-  try {
-    return await apiClient.post('/rubric/seed')
-  } catch (e) {
-    return {
-      error: true,
-      e,
-    }
-  }
-}
 
 /**
  * Actualizar datos de un criterio evaluable (ADMIN, COORDINATOR)
@@ -123,7 +109,6 @@ export default {
   getRubricCriteria,
   getCriterionById,
   createCriterion,
-  seedRubricCriteria,
   updateCriterion,
   toggleCriterionActive,
   deleteCriterion,

@@ -3,7 +3,6 @@ import { toast } from 'sonner'
 import {
   getCareers as getCareersRequest,
   createCareer as createCareerRequest,
-  seedCareers as seedCareersRequest,
   updateCareer as updateCareerRequest,
   deleteCareer as deleteCareerRequest,
 } from '@/service/career.api.js'
@@ -12,7 +11,7 @@ import { useAuthStore } from '@/store/useAuthStore.js'
 /**
  * Custom Hook: useCareersAdmin
  * Administra el ciclo de vida de las Carreras Técnicas:
- * Listado, búsqueda en vivo, creación, actualización, soft delete y sembrado inicial (seed).
+ * Listado, búsqueda en vivo, creación, actualización y soft delete.
  */
 export const useCareersAdmin = () => {
   const currentAuthUser = useAuthStore((state) => state.user)
@@ -22,7 +21,6 @@ export const useCareersAdmin = () => {
   const [careers, setCareers] = useState([])
   const [loading, setLoading] = useState(false)
   const [actionLoading, setActionLoading] = useState(false)
-  const [seedLoading, setSeedLoading] = useState(false)
 
   // Búsqueda reactiva en cliente
   const [searchQuery, setSearchQuery] = useState('')
@@ -221,30 +219,6 @@ export const useCareersAdmin = () => {
     return { success: true, data: response.data }
   }
 
-  /**
-   * Sembrado inicial automático de carreras por defecto (POST /career/seed)
-   */
-  const handleSeedCareers = async () => {
-    setSeedLoading(true)
-    const response = await seedCareersRequest()
-
-    if (response.error) {
-      setSeedLoading(false)
-      const serverData = response.e?.response?.data
-      const msg =
-        serverData?.msg ||
-        serverData?.message ||
-        'Error al ejecutar el sembrado inicial de carreras.'
-      toast.error(msg)
-      return { success: false, error: msg }
-    }
-
-    setSeedLoading(false)
-    toast.success('¡Carreras oficiales de Kinal sembradas con éxito!')
-    fetchCareers()
-    return { success: true, data: response.data }
-  }
-
   // Filtrado reactivo en cliente por término de búsqueda
   const filteredCareers = careers.filter((career) => {
     if (!searchQuery.trim()) return true
@@ -260,7 +234,6 @@ export const useCareersAdmin = () => {
     rawCareers: careers,
     loading,
     actionLoading,
-    seedLoading,
     isAdmin,
     currentAuthUser,
 
@@ -285,7 +258,6 @@ export const useCareersAdmin = () => {
     handleCreateCareer,
     handleUpdateCareer,
     handleDeleteCareer,
-    handleSeedCareers,
   }
 }
 

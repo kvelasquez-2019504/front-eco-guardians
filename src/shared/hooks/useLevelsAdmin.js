@@ -3,7 +3,6 @@ import { toast } from 'sonner'
 import {
   getLevels as getLevelsRequest,
   createLevel as createLevelRequest,
-  seedLevels as seedLevelsRequest,
   updateLevel as updateLevelRequest,
   deleteLevel as deleteLevelRequest,
   LEVEL_STAGES,
@@ -13,7 +12,7 @@ import { useAuthStore } from '@/store/useAuthStore.js'
 /**
  * Custom Hook: useLevelsAdmin
  * Administra el ciclo de vida de los niveles y secciones:
- * Listado, filtros por etapa, búsqueda en vivo, creación, actualización, soft delete y sembrado inicial (seed).
+ * Listado, filtros por etapa, búsqueda en vivo, creación, actualización y soft delete.
  */
 export const useLevelsAdmin = () => {
   const currentAuthUser = useAuthStore((state) => state.user)
@@ -23,7 +22,6 @@ export const useLevelsAdmin = () => {
   const [levels, setLevels] = useState([])
   const [loading, setLoading] = useState(false)
   const [actionLoading, setActionLoading] = useState(false)
-  const [seedLoading, setSeedLoading] = useState(false)
 
   // Filtros reactivos
   const [searchQuery, setSearchQuery] = useState('')
@@ -232,30 +230,6 @@ export const useLevelsAdmin = () => {
     return { success: true, data: response.data }
   }
 
-  /**
-   * Sembrado inicial automático de grados de Kinal (POST /level/seed)
-   */
-  const handleSeedLevels = async () => {
-    setSeedLoading(true)
-    const response = await seedLevelsRequest()
-
-    if (response.error) {
-      setSeedLoading(false)
-      const serverData = response.e?.response?.data
-      const msg =
-        serverData?.msg ||
-        serverData?.message ||
-        'Error al ejecutar el sembrado inicial de grados.'
-      toast.error(msg)
-      return { success: false, error: msg }
-    }
-
-    setSeedLoading(false)
-    toast.success('¡Grados y niveles oficiales de Kinal sembrados con éxito!')
-    fetchLevels()
-    return { success: true, data: response.data }
-  }
-
   // Filtrado reactivo en cliente por etapa y término de búsqueda
   const filteredLevels = levels.filter((level) => {
     // 1. Filtro por etapa (BASICO / DIVERSIFICADO)
@@ -287,7 +261,6 @@ export const useLevelsAdmin = () => {
     rawLevels: levels,
     loading,
     actionLoading,
-    seedLoading,
     availableStages: LEVEL_STAGES,
     isAdmin,
     currentAuthUser,
@@ -315,7 +288,6 @@ export const useLevelsAdmin = () => {
     handleCreateLevel,
     handleUpdateLevel,
     handleDeleteLevel,
-    handleSeedLevels,
   }
 }
 

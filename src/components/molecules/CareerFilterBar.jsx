@@ -1,4 +1,4 @@
-import { Search, RefreshCw, Sparkles, Plus } from 'lucide-react'
+import { Search, RefreshCw, Plus } from 'lucide-react'
 import { Button } from '../atoms/Button.jsx'
 
 /**
@@ -12,8 +12,6 @@ import { Button } from '../atoms/Button.jsx'
  * @param {boolean} [props.loading=false] - Estado de carga
  * @param {boolean} [props.isAdmin=false] - Si el usuario actual es ADMIN
  * @param {Function} [props.onCreateCareer] - Callback para abrir modal de creación
- * @param {Function} [props.onSeedCareers] - Callback para disparar sembrado inicial
- * @param {boolean} [props.seedLoading=false] - Estado de carga del sembrado
  */
 export const CareerFilterBar = ({
   searchQuery,
@@ -22,8 +20,6 @@ export const CareerFilterBar = ({
   loading = false,
   isAdmin = false,
   onCreateCareer,
-  onSeedCareers,
-  seedLoading = false,
 }) => {
   return (
     <div className="bg-eco-card border border-eco-border rounded-2xl p-4 shadow-lg flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
@@ -69,39 +65,17 @@ export const CareerFilterBar = ({
         </Button>
 
         {/* Acciones exclusivas para ADMIN (ocultas para otros roles) */}
-        {isAdmin && (
-          <>
-            {/* Sembrado Inicial (Seed) */}
-            {onSeedCareers && (
-              <Button
-                type="button"
-                variant="secondary"
-                size="md"
-                onClick={onSeedCareers}
-                disabled={seedLoading || loading}
-                isLoading={seedLoading}
-                leftIcon={!seedLoading ? <Sparkles size={15} className="text-eco-star" /> : null}
-                title="Poblar carreras por defecto (Informática, Dibujo Técnico, Electrónica)"
-                className="shrink-0 whitespace-nowrap text-xs sm:text-sm"
-              >
-                Sembrar Carreras
-              </Button>
-            )}
-
-            {/* Crear Carrera */}
-            {onCreateCareer && (
-              <Button
-                type="button"
-                variant="primary"
-                size="md"
-                onClick={onCreateCareer}
-                leftIcon={<Plus size={16} />}
-                className="shrink-0 whitespace-nowrap text-xs sm:text-sm"
-              >
-                Nueva Carrera
-              </Button>
-            )}
-          </>
+        {isAdmin && onCreateCareer && (
+          <Button
+            type="button"
+            variant="primary"
+            size="md"
+            onClick={onCreateCareer}
+            leftIcon={<Plus size={16} />}
+            className="shrink-0 whitespace-nowrap text-xs sm:text-sm"
+          >
+            Nueva Carrera
+          </Button>
         )}
       </div>
     </div>

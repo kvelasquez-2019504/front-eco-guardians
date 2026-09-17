@@ -18,7 +18,6 @@ export const LevelsPage = () => {
     rawLevels,
     loading,
     actionLoading,
-    seedLoading,
     availableStages,
     isAdmin,
 
@@ -42,7 +41,6 @@ export const LevelsPage = () => {
     handleCreateLevel,
     handleUpdateLevel,
     handleDeleteLevel,
-    handleSeedLevels,
   } = useLevelsAdmin()
 
   // Conteo de métricas
@@ -119,8 +117,6 @@ export const LevelsPage = () => {
         loading={loading}
         isAdmin={isAdmin}
         onCreateLevel={isAdmin ? openCreateModal : undefined}
-        onSeedLevels={isAdmin ? handleSeedLevels : undefined}
-        seedLoading={seedLoading}
       />
 
       {/* 3. Tabla Principal de Niveles */}
@@ -130,8 +126,6 @@ export const LevelsPage = () => {
         isAdmin={isAdmin}
         onEdit={openEditModal}
         onDelete={openDeleteModal}
-        onSeed={isAdmin ? handleSeedLevels : undefined}
-        seedLoading={seedLoading}
       />
 
       {/* 4. Modales para ADMIN */}

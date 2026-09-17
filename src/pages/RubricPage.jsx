@@ -18,10 +18,8 @@ export const RubricPage = () => {
     metrics,
     loading,
     actionLoading,
-    seedLoading,
     canManage,
     canDelete,
-    canSeed,
 
     searchQuery,
     setSearchQuery,
@@ -46,7 +44,6 @@ export const RubricPage = () => {
     handleUpdateCriterion,
     handleToggleActive,
     handleDeleteCriterion,
-    handleSeedCriteria,
   } = useRubric()
 
   return (
@@ -121,9 +118,6 @@ export const RubricPage = () => {
         onActiveFilterChange={setActiveFilter}
         onRefresh={fetchCriteria}
         loading={loading}
-        canSeed={canSeed}
-        onSeed={handleSeedCriteria}
-        seedLoading={seedLoading}
         canManage={canManage}
         onCreate={openCreateModal}
       />
@@ -137,8 +131,6 @@ export const RubricPage = () => {
         onEdit={openEditModal}
         onToggleActive={handleToggleActive}
         onDelete={openDeleteModal}
-        onSeed={handleSeedCriteria}
-        seedLoading={seedLoading}
       />
 
       {/* 4. Modales de Gestión */}

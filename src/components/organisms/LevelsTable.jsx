@@ -1,4 +1,4 @@
-import { Edit2, Trash2, Layers, Sparkles } from 'lucide-react'
+import { Edit2, Trash2, Layers } from 'lucide-react'
 import { Th } from '../atoms/Th.jsx'
 import { Td } from '../atoms/Td.jsx'
 import { Tr } from '../atoms/Tr.jsx'
@@ -17,8 +17,6 @@ import { UserStatusBadge } from '../molecules/UserStatusBadge.jsx'
  * @param {boolean} props.isAdmin - Si el usuario autenticado tiene permisos de mutación (ADMIN)
  * @param {Function} props.onEdit - Callback al presionar Editar
  * @param {Function} props.onDelete - Callback al presionar Desactivar
- * @param {Function} [props.onSeed] - Callback para sembrado si la tabla está vacía
- * @param {boolean} [props.seedLoading=false] - Estado de carga del sembrado
  */
 export const LevelsTable = ({
   levels = [],
@@ -26,8 +24,6 @@ export const LevelsTable = ({
   isAdmin = false,
   onEdit,
   onDelete,
-  onSeed,
-  seedLoading = false,
 }) => {
   return (
     <div className="bg-eco-card border border-eco-border rounded-2xl shadow-xl overflow-hidden flex flex-col">
@@ -71,26 +67,8 @@ export const LevelsTable = ({
                       No hay niveles registrados
                     </span>
                     <p className="text-xs text-eco-muted font-body leading-relaxed">
-                      {isAdmin
-                        ? 'La base de datos no cuenta con grados aún. Puedes crearlos manualmente o ejecutar el sembrado automático oficial de Kinal.'
-                        : 'No se encontraron niveles educativos registrados en el sistema.'}
+                      No se encontraron niveles educativos registrados en el sistema.
                     </p>
-
-                    {isAdmin && onSeed && (
-                      <div className="pt-2">
-                        <Button
-                          type="button"
-                          variant="primary"
-                          size="md"
-                          onClick={onSeed}
-                          disabled={seedLoading}
-                          isLoading={seedLoading}
-                          leftIcon={<Sparkles size={16} />}
-                        >
-                          Sembrar Grados Oficiales
-                        </Button>
-                      </div>
-                    )}
                   </div>
                 </td>
               </tr>

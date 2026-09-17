@@ -47,20 +47,6 @@ export const createCareer = async (careerData) => {
   }
 }
 
-/**
- * Sembrado inicial de carreras por defecto (Informática, Dibujo Técnico, Electrónica) (Exclusivo ADMIN)
- * @returns {Promise<any>} Respuesta con las carreras sembradas o { error: true, e }
- */
-export const seedCareers = async () => {
-  try {
-    return await apiClient.post('/career/seed')
-  } catch (e) {
-    return {
-      error: true,
-      e,
-    }
-  }
-}
 
 /**
  * Actualizar datos de una carrera técnica (Exclusivo ADMIN)
@@ -99,7 +85,6 @@ export default {
   getCareers,
   getCareerById,
   createCareer,
-  seedCareers,
   updateCareer,
   deleteCareer,
 }

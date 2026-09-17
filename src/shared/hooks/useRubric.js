@@ -6,7 +6,6 @@ import {
   updateCriterion as updateCriterionRequest,
   toggleCriterionActive as toggleCriterionActiveRequest,
   deleteCriterion as deleteCriterionRequest,
-  seedRubricCriteria as seedRubricCriteriaRequest,
 } from '@/service/rubric.api.js'
 import { useAuthStore } from '@/store/useAuthStore.js'
 
@@ -14,7 +13,7 @@ import { useAuthStore } from '@/store/useAuthStore.js'
  * Custom Hook: useRubric
  * Administra el ciclo de vida de los criterios de evaluación de la Rúbrica Oficial:
  * Listado, filtrado reactivo por categoría y estado de evaluación, creación, edición,
- * alternar disponibilidad (isActive), desactivación lógica y sembrado inicial.
+ * alternar disponibilidad (isActive) y desactivación lógica.
  */
 export const useRubric = () => {
   const currentAuthUser = useAuthStore((state) => state.user)
@@ -22,7 +21,6 @@ export const useRubric = () => {
   const isCoordinator = currentAuthUser?.role === 'COORDINATOR'
   const canManage = isAdmin || isCoordinator
   const canDelete = isAdmin
-  const canSeed = isAdmin
 
   // Estados de datos
   const [criteria, setCriteria] = useState([])
@@ -30,7 +28,6 @@ export const useRubric = () => {
   // Estados de carga
   const [loading, setLoading] = useState(false)
   const [actionLoading, setActionLoading] = useState(false)
-  const [seedLoading, setSeedLoading] = useState(false)
 
   // Filtros en cliente
   const [searchQuery, setSearchQuery] = useState('')
@@ -249,30 +246,6 @@ export const useRubric = () => {
     return { success: true, data: response.data }
   }
 
-  /**
-   * Sembrado institucional inicial (POST /rubric/seed)
-   */
-  const handleSeedCriteria = async () => {
-    setSeedLoading(true)
-
-    const response = await seedRubricCriteriaRequest()
-
-    if (response.error) {
-      setSeedLoading(false)
-      const serverData = response.e?.response?.data
-      const msg =
-        serverData?.msg ||
-        serverData?.message ||
-        'Error al ejecutar el sembrado de la rúbrica oficial.'
-      toast.error(msg)
-      return { success: false, error: msg }
-    }
-
-    setSeedLoading(false)
-    toast.success('¡Criterios institucionales de Kinal sembrados exitosamente!')
-    fetchCriteria()
-    return { success: true, data: response.data }
-  }
 
   /**
    * Criterios filtrados
@@ -332,10 +305,8 @@ export const useRubric = () => {
     metrics,
     loading,
     actionLoading,
-    seedLoading,
     canManage,
     canDelete,
-    canSeed,
     isAdmin,
     isCoordinator,
     searchQuery,
@@ -361,7 +332,6 @@ export const useRubric = () => {
     handleUpdateCriterion,
     handleToggleActive,
     handleDeleteCriterion,
-    handleSeedCriteria,
   }
 }
 

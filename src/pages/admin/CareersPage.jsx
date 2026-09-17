@@ -18,7 +18,6 @@ export const CareersPage = () => {
     rawCareers,
     loading,
     actionLoading,
-    seedLoading,
     isAdmin,
 
     searchQuery,
@@ -39,7 +38,6 @@ export const CareersPage = () => {
     handleCreateCareer,
     handleUpdateCareer,
     handleDeleteCareer,
-    handleSeedCareers,
   } = useCareersAdmin()
 
   // Conteo de métricas
@@ -97,7 +95,7 @@ export const CareersPage = () => {
         </div>
       </div>
 
-      {/* 2. Barra de Filtros y Acciones (botón de creación y seed residen exclusivamente aquí) */}
+      {/* 2. Barra de Filtros y Acciones (botón de creación reside exclusivamente aquí) */}
       <CareerFilterBar
         searchQuery={searchQuery}
         onSearchQueryChange={setSearchQuery}
@@ -105,8 +103,6 @@ export const CareersPage = () => {
         loading={loading}
         isAdmin={isAdmin}
         onCreateCareer={isAdmin ? openCreateModal : undefined}
-        onSeedCareers={isAdmin ? handleSeedCareers : undefined}
-        seedLoading={seedLoading}
       />
 
       {/* 3. Tabla Principal de Carreras Técnicas */}
@@ -116,8 +112,6 @@ export const CareersPage = () => {
         isAdmin={isAdmin}
         onEdit={openEditModal}
         onDelete={openDeleteModal}
-        onSeed={isAdmin ? handleSeedCareers : undefined}
-        seedLoading={seedLoading}
       />
 
       {/* 4. Modales para ADMIN */}

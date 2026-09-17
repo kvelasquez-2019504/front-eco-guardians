@@ -1,11 +1,11 @@
-import { Search, RefreshCw, Plus, Filter, Sparkles } from 'lucide-react'
+import { Search, RefreshCw, Plus, Filter } from 'lucide-react'
 import { Button } from '../atoms/Button.jsx'
 
 /**
  * Molécula: RubricFilterBar
  * Barra interactiva para búsqueda reactiva y filtrado de criterios de evaluación.
  * Incluye filtros por categoría y disponibilidad en listas de cotejo,
- * botón de refresco y disparadores para sembrado y creación (única ubicación de botones).
+ * botón de refresco y disparador de creación (única ubicación de botones).
  * 
  * @param {Object} props
  * @param {string} props.searchQuery - Término de búsqueda
@@ -16,9 +16,6 @@ import { Button } from '../atoms/Button.jsx'
  * @param {Function} props.onActiveFilterChange - Callback para cambio de disponibilidad
  * @param {Function} props.onRefresh - Callback para recargar criterios
  * @param {boolean} [props.loading=false] - Estado de carga
- * @param {boolean} [props.canSeed=false] - Si puede sembrar criterios (ADMIN)
- * @param {Function} [props.onSeed] - Callback para sembrado institucional
- * @param {boolean} [props.seedLoading=false] - Estado de carga del sembrado
  * @param {boolean} [props.canManage=false] - Si puede crear criterios (ADMIN o COORDINATOR)
  * @param {Function} [props.onCreate] - Callback para abrir modal de creación
  */
@@ -31,9 +28,6 @@ export const RubricFilterBar = ({
   onActiveFilterChange,
   onRefresh,
   loading = false,
-  canSeed = false,
-  onSeed,
-  seedLoading = false,
   canManage = false,
   onCreate,
 }) => {
@@ -117,22 +111,6 @@ export const RubricFilterBar = ({
         >
           <RefreshCw size={16} className={loading ? 'animate-spin text-eco-green' : ''} />
         </Button>
-
-        {/* Botón Sembrado Inicial (Exclusivo ADMIN, única ubicación en la pantalla) */}
-        {canSeed && onSeed && (
-          <Button
-            type="button"
-            variant="secondary"
-            size="md"
-            onClick={onSeed}
-            disabled={seedLoading}
-            isLoading={seedLoading}
-            leftIcon={<Sparkles size={16} />}
-            className="shrink-0 whitespace-nowrap text-xs sm:text-sm"
-          >
-            Sembrar Rúbrica
-          </Button>
-        )}
 
         {/* Botón Principal Nuevo Criterio (ADMIN / COORDINATOR, única ubicación en la pantalla) */}
         {canManage && onCreate && (

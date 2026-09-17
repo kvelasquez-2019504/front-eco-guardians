@@ -1,4 +1,4 @@
-import { Edit2, Trash2, Briefcase, Sparkles } from 'lucide-react'
+import { Edit2, Trash2, Briefcase } from 'lucide-react'
 import { Th } from '../atoms/Th.jsx'
 import { Td } from '../atoms/Td.jsx'
 import { Tr } from '../atoms/Tr.jsx'
@@ -15,8 +15,6 @@ import { UserStatusBadge } from '../molecules/UserStatusBadge.jsx'
  * @param {boolean} props.isAdmin - Si el usuario autenticado tiene permisos de mutación (ADMIN)
  * @param {Function} props.onEdit - Callback al presionar Editar
  * @param {Function} props.onDelete - Callback al presionar Desactivar
- * @param {Function} [props.onSeed] - Callback para sembrado si la tabla está vacía
- * @param {boolean} [props.seedLoading=false] - Estado de carga del sembrado
  */
 export const CareersTable = ({
   careers = [],
@@ -24,8 +22,6 @@ export const CareersTable = ({
   isAdmin = false,
   onEdit,
   onDelete,
-  onSeed,
-  seedLoading = false,
 }) => {
   return (
     <div className="bg-eco-card border border-eco-border rounded-2xl shadow-xl overflow-hidden flex flex-col">
@@ -67,26 +63,8 @@ export const CareersTable = ({
                       No hay carreras técnicas registradas
                     </span>
                     <p className="text-xs text-eco-muted font-body leading-relaxed">
-                      {isAdmin
-                        ? 'Puedes crear especialidades manualmente o ejecutar el sembrado automático inicial de Kinal.'
-                        : 'No se encontraron carreras técnicas registradas en el sistema.'}
+                      No se encontraron carreras técnicas registradas en el sistema.
                     </p>
-
-                    {isAdmin && onSeed && (
-                      <div className="pt-2">
-                        <Button
-                          type="button"
-                          variant="primary"
-                          size="md"
-                          onClick={onSeed}
-                          disabled={seedLoading}
-                          isLoading={seedLoading}
-                          leftIcon={<Sparkles size={16} />}
-                        >
-                          Sembrar Carreras Oficiales
-                        </Button>
-                      </div>
-                    )}
                   </div>
                 </td>
               </tr>

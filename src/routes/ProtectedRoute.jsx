@@ -6,8 +6,9 @@ import { useAuthStore } from '@/store/useAuthStore.js'
  * Protege rutas privadas (Dashboard, Turnos, Rankings).
  * Si el usuario no está autenticado, lo redirige al login.
  */
-export const ProtectedRoute = () => {
+export const ProtectedRoute = ({ allowedRoles }) => {
   const status = useAuthStore((state) => state.status)
+  const user = useAuthStore((state) => state.user)
 
   // Pantalla de carga mientras se verifica la sesión en el arranque
   if (status === 'checking') {
@@ -17,15 +18,21 @@ export const ProtectedRoute = () => {
           🌿
         </span>
         <p className="font-heading font-bold text-sm text-eco-green tracking-wide">
-          Verificando sesión...
+          Verificando credenciales...
         </p>
       </div>
     )
   }
 
-  // Si no está autenticado, bloquear acceso y enviar a /login
-  if (status === 'unauthenticated') {
+  // 1. Si no ha iniciado sesión, redirigir a Login
+  if (status === 'unauthenticated' || !user) {
     return <Navigate to="/login" replace />
+  }
+
+  // 2. Si se especifican roles y el rol del usuario no está autorizado
+  if (allowedRoles && Array.isArray(allowedRoles) && !allowedRoles.includes(user.role)) {
+    // Redirigir a una ruta segura por defecto según su rol
+    return <Navigate to="/feed" replace />
   }
 
   return <Outlet />

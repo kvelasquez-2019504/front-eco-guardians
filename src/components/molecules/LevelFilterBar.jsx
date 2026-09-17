@@ -1,4 +1,4 @@
-import { Search, RefreshCw, Sparkles, Plus } from 'lucide-react'
+import { Search, RefreshCw, Plus } from 'lucide-react'
 import { SelectField } from './SelectField.jsx'
 import { Button } from '../atoms/Button.jsx'
 
@@ -15,8 +15,6 @@ import { Button } from '../atoms/Button.jsx'
  * @param {boolean} [props.loading=false] - Estado de carga de la lista
  * @param {boolean} [props.isAdmin=false] - Si el usuario actual es ADMIN
  * @param {Function} [props.onCreateLevel] - Callback para abrir modal de creación
- * @param {Function} [props.onSeedLevels] - Callback para disparar sembrado inicial
- * @param {boolean} [props.seedLoading=false] - Estado de carga del sembrado
  */
 export const LevelFilterBar = ({
   searchQuery,
@@ -27,8 +25,6 @@ export const LevelFilterBar = ({
   loading = false,
   isAdmin = false,
   onCreateLevel,
-  onSeedLevels,
-  seedLoading = false,
 }) => {
   const stageOptions = [
     { value: '', label: 'Todas las etapas' },
@@ -92,39 +88,17 @@ export const LevelFilterBar = ({
         </Button>
 
         {/* Acciones exclusivas para ADMIN (ocultas para COORDINATOR) */}
-        {isAdmin && (
-          <>
-            {/* Sembrado Inicial (Seed) */}
-            {onSeedLevels && (
-              <Button
-                type="button"
-                variant="secondary"
-                size="md"
-                onClick={onSeedLevels}
-                disabled={seedLoading || loading}
-                isLoading={seedLoading}
-                leftIcon={!seedLoading ? <Sparkles size={15} className="text-eco-star" /> : null}
-                title="Poblar los grados oficiales de Kinal en la base de datos"
-                className="shrink-0 whitespace-nowrap text-xs sm:text-sm"
-              >
-                Sembrar Grados
-              </Button>
-            )}
-
-            {/* Crear Nivel */}
-            {onCreateLevel && (
-              <Button
-                type="button"
-                variant="primary"
-                size="md"
-                onClick={onCreateLevel}
-                leftIcon={<Plus size={16} />}
-                className="shrink-0 whitespace-nowrap text-xs sm:text-sm"
-              >
-                Nuevo Nivel
-              </Button>
-            )}
-          </>
+        {isAdmin && onCreateLevel && (
+          <Button
+            type="button"
+            variant="primary"
+            size="md"
+            onClick={onCreateLevel}
+            leftIcon={<Plus size={16} />}
+            className="shrink-0 whitespace-nowrap text-xs sm:text-sm"
+          >
+            Nuevo Nivel
+          </Button>
         )}
       </div>
     </div>

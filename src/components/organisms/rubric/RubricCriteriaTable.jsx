@@ -1,4 +1,4 @@
-import { Edit2, Trash2, Award, Sparkles, BookOpen, ToggleLeft, ToggleRight } from 'lucide-react'
+import { Edit2, Trash2, Award, BookOpen, ToggleLeft, ToggleRight } from 'lucide-react'
 import { Th } from '../../atoms/Th.jsx'
 import { Td } from '../../atoms/Td.jsx'
 import { Tr } from '../../atoms/Tr.jsx'
@@ -19,8 +19,6 @@ import { RubricCategoryBadge } from '../../molecules/RubricCategoryBadge.jsx'
  * @param {Function} props.onEdit - Callback al presionar Editar
  * @param {Function} props.onToggleActive - Callback al alternar isActive en evaluaciones
  * @param {Function} props.onDelete - Callback al presionar Desactivar
- * @param {Function} [props.onSeed] - Callback para sembrado si la tabla está vacía
- * @param {boolean} [props.seedLoading=false] - Estado de carga del sembrado
  */
 export const RubricCriteriaTable = ({
   criteria = [],
@@ -30,8 +28,6 @@ export const RubricCriteriaTable = ({
   onEdit,
   onToggleActive,
   onDelete,
-  onSeed,
-  seedLoading = false,
 }) => {
   return (
     <div className="bg-eco-card border border-eco-border rounded-2xl shadow-xl overflow-hidden flex flex-col">
@@ -76,25 +72,8 @@ export const RubricCriteriaTable = ({
                       No hay criterios en la rúbrica
                     </span>
                     <p className="text-xs text-eco-muted font-body leading-relaxed">
-                      {canManage
-                        ? 'Puedes sembrar automáticamente los criterios oficiales de Fundación Kinal o agregar nuevos manualmente.'
-                        : 'No se encontraron criterios de evaluación que coincidan con los filtros aplicados.'}
+                      No se encontraron criterios de evaluación que coincidan con los filtros aplicados.
                     </p>
-                    {canDelete && onSeed && (
-                      <div className="pt-2">
-                        <Button
-                          type="button"
-                          variant="primary"
-                          size="md"
-                          onClick={onSeed}
-                          disabled={seedLoading}
-                          isLoading={seedLoading}
-                          leftIcon={<Sparkles size={16} />}
-                        >
-                          Sembrar Criterios Oficiales
-                        </Button>
-                      </div>
-                    )}
                   </div>
                 </td>
               </tr>

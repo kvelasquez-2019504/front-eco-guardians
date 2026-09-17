@@ -52,20 +52,6 @@ export const createLevel = async (levelData) => {
   }
 }
 
-/**
- * Sembrado inicial automático de grados de Kinal (Exclusivo ADMIN)
- * @returns {Promise<any>} Respuesta con los niveles generados o { error: true, e }
- */
-export const seedLevels = async () => {
-  try {
-    return await apiClient.post('/level/seed')
-  } catch (e) {
-    return {
-      error: true,
-      e,
-    }
-  }
-}
 
 /**
  * Actualizar datos de un nivel educativo (Exclusivo ADMIN)
@@ -105,7 +91,6 @@ export default {
   getLevels,
   getLevelById,
   createLevel,
-  seedLevels,
   updateLevel,
   deleteLevel,
 }
