@@ -91,7 +91,7 @@ export const CollectiveRankingTable = ({
               className={`
                 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer
                 ${bimester === 'ALL'
-                  ? 'bg-eco-primary text-black shadow-sm'
+                  ? 'bg-eco-primary text-(--color-eco-cyan) shadow-sm'
                   : 'text-eco-muted hover:text-eco-text'}
               `}
             >
@@ -105,7 +105,7 @@ export const CollectiveRankingTable = ({
                 className={`
                   px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer
                   ${String(bimester) === String(b)
-                    ? 'bg-eco-primary text-black shadow-sm'
+                    ? 'bg-eco-primary text-(--color-eco-green) shadow-sm'
                     : 'text-eco-muted hover:text-eco-text'}
                 `}
               >

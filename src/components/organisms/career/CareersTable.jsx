@@ -1,25 +1,23 @@
-import { Edit2, Trash2, Layers } from 'lucide-react'
-import { Th } from '../atoms/Th.jsx'
-import { Td } from '../atoms/Td.jsx'
-import { Tr } from '../atoms/Tr.jsx'
-import { Button } from '../atoms/Button.jsx'
-import { LevelStageBadge } from '../molecules/LevelStageBadge.jsx'
-import { SectionsBadgeList } from '../molecules/SectionsBadgeList.jsx'
-import { UserStatusBadge } from '../molecules/UserStatusBadge.jsx'
+import { Edit2, Trash2, Briefcase } from 'lucide-react'
+import { Th } from '../../atoms/Th.jsx'
+import { Td } from '../../atoms/Td.jsx'
+import { Tr } from '../../atoms/Tr.jsx'
+import { Button } from '../../atoms/Button.jsx'
+import { UserStatusBadge } from '../../molecules/UserStatusBadge.jsx'
 
 /**
- * Organismo: LevelsTable
- * Tabla responsiva para visualizar grados, etapas, secciones y estados de niveles educativos.
+ * Organismo: CareersTable
+ * Tabla responsiva para visualizar las especialidades técnicas de Fundación Kinal.
  * 
  * @param {Object} props
- * @param {Array} props.levels - Lista de niveles filtrados
+ * @param {Array} props.careers - Lista de carreras filtradas
  * @param {boolean} props.loading - Estado de carga de datos
  * @param {boolean} props.isAdmin - Si el usuario autenticado tiene permisos de mutación (ADMIN)
  * @param {Function} props.onEdit - Callback al presionar Editar
  * @param {Function} props.onDelete - Callback al presionar Desactivar
  */
-export const LevelsTable = ({
-  levels = [],
+export const CareersTable = ({
+  careers = [],
   loading = false,
   isAdmin = false,
   onEdit,
@@ -28,13 +26,11 @@ export const LevelsTable = ({
   return (
     <div className="bg-eco-card border border-eco-border rounded-2xl shadow-xl overflow-hidden flex flex-col">
       <div className="overflow-x-auto custom-scrollbar">
-        <table className="w-full text-left border-collapse min-w-[700px]">
+        <table className="w-full text-left border-collapse min-w-[650px]">
           <thead>
             <Tr variant="header">
-              <Th align="left">Grado / Nivel</Th>
-              <Th align="left">Etapa Académica</Th>
-              <Th align="center">Ordinal</Th>
-              <Th align="left">Secciones Habilitadas</Th>
+              <Th align="left">Especialidad Técnica</Th>
+              <Th align="left">Descripción y Competencias</Th>
               <Th align="center">Estado</Th>
               {isAdmin && <Th align="right">Acciones</Th>}
             </Tr>
@@ -44,11 +40,11 @@ export const LevelsTable = ({
             {/* 1. Estado de Carga */}
             {loading && (
               <tr>
-                <td colSpan={isAdmin ? 6 : 5} className="p-12 text-center">
+                <td colSpan={isAdmin ? 4 : 3} className="p-12 text-center">
                   <div className="flex flex-col items-center justify-center gap-3">
                     <div className="w-8 h-8 border-3 border-eco-green/20 border-t-eco-green rounded-full animate-spin" />
                     <span className="text-sm font-body text-eco-muted">
-                      Consultando catálogo de niveles educativos...
+                      Consultando catálogo de carreras técnicas...
                     </span>
                   </div>
                 </td>
@@ -56,64 +52,58 @@ export const LevelsTable = ({
             )}
 
             {/* 2. Estado Vacío */}
-            {!loading && levels.length === 0 && (
+            {!loading && careers.length === 0 && (
               <tr>
-                <td colSpan={isAdmin ? 6 : 5} className="p-12 text-center">
+                <td colSpan={isAdmin ? 4 : 3} className="p-12 text-center">
                   <div className="flex flex-col items-center justify-center gap-3 max-w-sm mx-auto">
                     <div className="p-3 bg-eco-bg rounded-2xl text-eco-muted border border-eco-border">
-                      <Layers size={32} />
+                      <Briefcase size={32} />
                     </div>
                     <span className="font-heading font-bold text-base text-eco-text">
-                      No hay niveles registrados
+                      No hay carreras técnicas registradas
                     </span>
                     <p className="text-xs text-eco-muted font-body leading-relaxed">
-                      No se encontraron niveles educativos registrados en el sistema.
+                      No se encontraron carreras técnicas registradas en el sistema.
                     </p>
                   </div>
                 </td>
               </tr>
             )}
 
-            {/* 3. Filas de Niveles */}
+            {/* 3. Filas de Carreras */}
             {!loading &&
-              levels.map((level) => {
-                const isInactive = level.status === false
+              careers.map((career) => {
+                const isInactive = career.status === false
 
                 return (
                   <Tr
-                    key={level.uid}
+                    key={career.uid}
                     className={isInactive ? 'opacity-65' : ''}
                   >
-                    {/* Nombre del Grado */}
+                    {/* Nombre de la Carrera */}
                     <Td align="left">
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-2 h-2 rounded-full bg-eco-green shrink-0" />
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-xl bg-eco-bg text-eco-cyan border border-eco-border shrink-0">
+                          <Briefcase size={16} />
+                        </div>
                         <span className="font-heading font-bold text-sm text-eco-text">
-                          {level.name}
+                          {career.name}
                         </span>
                       </div>
                     </Td>
 
-                    {/* Etapa */}
-                    <Td align="left">
-                      <LevelStageBadge stage={level.stage} />
-                    </Td>
-
-                    {/* Grado Ordinal */}
-                    <Td align="center" variant="muted" size="md">
-                      <span className="font-mono text-xs font-bold px-2 py-0.5 rounded-lg bg-eco-bg border border-eco-border text-eco-cyan">
-                        {level.gradeNumber}.° Grado
-                      </span>
-                    </Td>
-
-                    {/* Secciones Habilitadas */}
-                    <Td align="left">
-                      <SectionsBadgeList sections={level.allowedSections} />
+                    {/* Descripción */}
+                    <Td align="left" variant="muted" size="sm">
+                      <p className="line-clamp-2 max-w-md">
+                        {career.description?.trim() || (
+                          <span className="text-eco-muted/50 italic">Sin descripción registrada</span>
+                        )}
+                      </p>
                     </Td>
 
                     {/* Estado */}
                     <Td align="center">
-                      <UserStatusBadge status={level.status} />
+                      <UserStatusBadge status={career.status} />
                     </Td>
 
                     {/* Acciones (Exclusivas ADMIN) */}
@@ -125,9 +115,9 @@ export const LevelsTable = ({
                             type="button"
                             variant="secondary"
                             size="sm"
-                            onClick={() => onEdit(level)}
-                            title="Editar nivel"
-                            aria-label={`Editar ${level.name}`}
+                            onClick={() => onEdit(career)}
+                            title="Editar carrera"
+                            aria-label={`Editar ${career.name}`}
                             className="px-2.5 py-1.5"
                           >
                             <Edit2 size={14} className="text-eco-text" />
@@ -140,13 +130,13 @@ export const LevelsTable = ({
                             variant="danger"
                             size="sm"
                             disabled={isInactive}
-                            onClick={() => onDelete(level)}
+                            onClick={() => onDelete(career)}
                             title={
                               isInactive
-                                ? 'El nivel ya está inactivo'
-                                : 'Desactivar nivel'
+                                ? 'La carrera ya está inactiva'
+                                : 'Desactivar carrera'
                             }
-                            aria-label={`Desactivar ${level.name}`}
+                            aria-label={`Desactivar ${career.name}`}
                             className="px-2.5 py-1.5"
                           >
                             <Trash2 size={14} />
@@ -166,15 +156,15 @@ export const LevelsTable = ({
       <div className="px-6 py-3.5 bg-eco-bg/60 border-t border-eco-border flex items-center justify-between text-xs text-eco-muted font-body">
         <span>
           Total:{' '}
-          <strong className="text-eco-text">{levels.length}</strong> nivel(es)
-          mostrado(s)
+          <strong className="text-eco-text">{careers.length}</strong> especialidad(es)
+          mostrada(s)
         </span>
         <span className="text-[11px]">
-          {isAdmin ? 'Acceso administrativo total' : 'Vista de solo lectura para Coordinación'}
+          {isAdmin ? 'Acceso administrativo total' : 'Vista de solo lectura'}
         </span>
       </div>
     </div>
   )
 }
 
-export default LevelsTable
+export default CareersTable

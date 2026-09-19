@@ -1,12 +1,12 @@
 import { Edit2, UserX, Users as UsersIcon } from 'lucide-react'
-import { Th } from '../atoms/Th.jsx'
-import { Td } from '../atoms/Td.jsx'
-import { Tr } from '../atoms/Tr.jsx'
-import { Button } from '../atoms/Button.jsx'
-import { UserAvatar } from '../atoms/UserAvatar.jsx'
-import { AuraBadge } from '../atoms/AuraBadge.jsx'
-import { UserRoleBadge } from '../molecules/UserRoleBadge.jsx'
-import { UserStatusBadge } from '../molecules/UserStatusBadge.jsx'
+import { Th } from '../../atoms/Th.jsx'
+import { Td } from '../../atoms/Td.jsx'
+import { Tr } from '../../atoms/Tr.jsx'
+import { Button } from '../../atoms/Button.jsx'
+import { UserAvatar } from '../../atoms/UserAvatar.jsx'
+import { AuraBadge } from '../../atoms/AuraBadge.jsx'
+import { UserRoleBadge } from '../../molecules/UserRoleBadge.jsx'
+import { UserStatusBadge } from '../../molecules/UserStatusBadge.jsx'
 
 /**
  * Organismo: UsersTable

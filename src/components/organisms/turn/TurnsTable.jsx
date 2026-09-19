@@ -103,7 +103,7 @@ export const TurnsTable = ({
               className={`
                 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer
                 ${bimesterFilter === 'ALL'
-                  ? 'bg-eco-primary text-black shadow-sm'
+                  ? 'bg-eco-primary text-(--color-eco-cyan) shadow-sm'
                   : 'text-eco-muted hover:text-eco-text'}
               `}
             >
@@ -117,7 +117,7 @@ export const TurnsTable = ({
                 className={`
                   px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer
                   ${bimesterFilter === String(b)
-                    ? 'bg-eco-primary text-black shadow-sm'
+                    ? 'bg-eco-primary text-(--color-eco-green) shadow-sm'
                     : 'text-eco-muted hover:text-eco-text'}
                 `}
               >

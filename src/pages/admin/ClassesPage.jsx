@@ -53,7 +53,7 @@ export const ClassesPage = () => {
   } = useClassesAdmin()
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-200">
+    <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
       {/* 1. Encabezado principal y métricas (sin botones de acción duplicados) */}
       <div className="bg-eco-card border border-eco-border rounded-2xl p-6 sm:p-8 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -142,45 +142,55 @@ export const ClassesPage = () => {
 
       {/* 4. Modales de Gestión */}
       {/* Modal de Creación */}
-      <ClassCreateModal
-        isOpen={isCreateModalOpen}
-        onClose={closeCreateModal}
-        onSave={handleCreateClass}
-        loading={actionLoading}
-        levelsList={levelsList}
-        careersList={careersList}
-        teachersList={teachersList}
-      />
+      {isCreateModalOpen && (
+        <ClassCreateModal
+          isOpen={isCreateModalOpen}
+          onClose={closeCreateModal}
+          onSave={handleCreateClass}
+          loading={actionLoading}
+          levelsList={levelsList}
+          careersList={careersList}
+          teachersList={teachersList}
+        />
+      )}
 
       {/* Modal de Edición General */}
-      <ClassEditModal
-        isOpen={isEditModalOpen}
-        onClose={closeEditModal}
-        classGroup={selectedClass}
-        onSave={handleUpdateClass}
-        loading={actionLoading}
-        careersList={careersList}
-        teachersList={teachersList}
-      />
+      {isEditModalOpen && selectedClass && (
+        <ClassEditModal
+          key={selectedClass.uid}
+          isOpen={isEditModalOpen}
+          onClose={closeEditModal}
+          classGroup={selectedClass}
+          onSave={handleUpdateClass}
+          loading={actionLoading}
+          careersList={careersList}
+          teachersList={teachersList}
+        />
+      )}
 
       {/* Modal de Asignación Rápida de Docente */}
-      <ClassTeacherModal
-        isOpen={isTeacherModalOpen}
-        onClose={closeTeacherModal}
-        classGroup={selectedClass}
-        onSave={handleAssignTeacher}
-        loading={actionLoading}
-        teachersList={teachersList}
-      />
+      {isTeacherModalOpen && selectedClass && (
+        <ClassTeacherModal
+          key={selectedClass.uid}
+          isOpen={isTeacherModalOpen}
+          onClose={closeTeacherModal}
+          classGroup={selectedClass}
+          onSave={handleAssignTeacher}
+          loading={actionLoading}
+          teachersList={teachersList}
+        />
+      )}
 
       {/* Modal de Desactivación (Soft Delete) */}
-      <ClassDeleteModal
-        isOpen={isDeleteModalOpen}
-        onClose={closeDeleteModal}
-        classGroup={selectedClass}
-        onConfirm={handleDeleteClass}
-        loading={actionLoading}
-      />
+      {isDeleteModalOpen && selectedClass && (
+        <ClassDeleteModal
+          isOpen={isDeleteModalOpen}
+          onClose={closeDeleteModal}
+          classGroup={selectedClass}
+          onConfirm={handleDeleteClass}
+          loading={actionLoading}
+        />
+      )}
     </div>
   )
 }

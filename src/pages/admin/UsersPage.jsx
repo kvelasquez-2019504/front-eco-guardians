@@ -2,10 +2,10 @@ import { Shield, UserCheck, UserX } from 'lucide-react'
 import { useUsersAdmin } from '@/shared/hooks/useUsersAdmin.js'
 import { H1 } from '@/components/atoms/Heading.jsx'
 import { UserFilterBar } from '@/components/molecules/UserFilterBar.jsx'
-import { UsersTable } from '@/components/organisms/UsersTable.jsx'
-import { UserCreateModal } from '@/components/organisms/UserCreateModal.jsx'
-import { UserEditModal } from '@/components/organisms/UserEditModal.jsx'
-import { UserDeleteModal } from '@/components/organisms/UserDeleteModal.jsx'
+import { UsersTable } from '@/components/organisms/user/UsersTable.jsx'
+import { UserCreateModal } from '@/components/organisms/user/UserCreateModal.jsx'
+import { UserEditModal } from '@/components/organisms/user/UserEditModal.jsx'
+import { UserDeleteModal } from '@/components/organisms/user/UserDeleteModal.jsx'
 
 /**
  * Página: UsersPage
@@ -54,7 +54,7 @@ export const UsersPage = () => {
   const inactiveCount = rawUsers.filter((u) => u.status === false).length
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-200">
+    <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
       {/* 1. Encabezado de la página con métricas y botón de creación */}
       <div className="bg-eco-card border border-eco-border rounded-2xl p-6 sm:p-8 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">

@@ -2,10 +2,10 @@ import { School, CheckCircle2, XCircle } from 'lucide-react'
 import { useCareersAdmin } from '@/shared/hooks/useCareersAdmin.js'
 import { H1 } from '@/components/atoms/Heading.jsx'
 import { CareerFilterBar } from '@/components/molecules/CareerFilterBar.jsx'
-import { CareersTable } from '@/components/organisms/CareersTable.jsx'
-import { CareerCreateModal } from '@/components/organisms/CareerCreateModal.jsx'
-import { CareerEditModal } from '@/components/organisms/CareerEditModal.jsx'
-import { CareerDeleteModal } from '@/components/organisms/CareerDeleteModal.jsx'
+import { CareersTable } from '@/components/organisms/career/CareersTable.jsx'
+import { CareerCreateModal } from '@/components/organisms/career/CareerCreateModal.jsx'
+import { CareerEditModal } from '@/components/organisms/career/CareerEditModal.jsx'
+import { CareerDeleteModal } from '@/components/organisms/career/CareerDeleteModal.jsx'
 
 /**
  * Página: CareersPage
@@ -46,7 +46,7 @@ export const CareersPage = () => {
   const inactiveCount = rawCareers.filter((c) => c.status === false).length
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-200">
+    <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
       {/* 1. Encabezado principal y métricas (sin botones duplicados) */}
       <div className="bg-eco-card border border-eco-border rounded-2xl p-6 sm:p-8 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">

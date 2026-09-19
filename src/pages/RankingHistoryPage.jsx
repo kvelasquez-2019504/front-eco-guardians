@@ -63,7 +63,7 @@ export const RankingHistoryPage = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-200">
+    <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
       {/* 
         Encabezado de la página:
         REGLA ESTRICTA: Sin botones de acción duplicados aquí.
@@ -106,7 +106,7 @@ export const RankingHistoryPage = () => {
               className={`
                 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer
                 ${bimesterFilter === 'ALL'
-                  ? 'bg-eco-primary text-black shadow-sm'
+                  ? 'bg-eco-primary text-(--color-eco-cyan) shadow-sm'
                   : 'text-eco-muted hover:text-eco-text'}
               `}
             >
@@ -120,7 +120,7 @@ export const RankingHistoryPage = () => {
                 className={`
                   px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer
                   ${bimesterFilter === String(b)
-                    ? 'bg-eco-primary text-black shadow-sm'
+                    ? 'bg-eco-primary text-(--color-eco-green) shadow-sm'
                     : 'text-eco-muted hover:text-eco-text'}
                 `}
               >

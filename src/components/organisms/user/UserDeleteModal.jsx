@@ -1,30 +1,31 @@
 import { AlertTriangle, X } from 'lucide-react'
-import { H3 } from '../atoms/Heading.jsx'
-import { Button } from '../atoms/Button.jsx'
-import { LevelStageBadge } from '../molecules/LevelStageBadge.jsx'
+import { H3 } from '../../atoms/Heading.jsx'
+import { Button } from '../../atoms/Button.jsx'
+import { UserAvatar } from '../../atoms/UserAvatar.jsx'
+import { UserRoleBadge } from '../../molecules/UserRoleBadge.jsx'
 
 /**
- * Organismo: LevelDeleteModal
- * Modal de confirmación para desactivar (soft delete) un nivel educativo.
+ * Organismo: UserDeleteModal
+ * Modal de confirmación para desactivar (soft delete) una cuenta de usuario en Eco-Guardianes.
  * 
  * @param {Object} props
- * @param {boolean} props.isOpen - Si el modal está visible
+ * @param {boolean} props.isOpen - Si el modal está activo
  * @param {Function} props.onClose - Callback para cerrar el modal
- * @param {Object} props.level - Nivel educativo a desactivar
- * @param {Function} props.onConfirm - Callback al confirmar (uid)
+ * @param {Object} props.user - Usuario seleccionado para desactivación
+ * @param {Function} props.onConfirm - Callback al confirmar la desactivación (id)
  * @param {boolean} [props.loading=false] - Estado de la petición
  */
-export const LevelDeleteModal = ({
+export const UserDeleteModal = ({
   isOpen,
   onClose,
-  level,
+  user,
   onConfirm,
   loading = false,
 }) => {
-  if (!isOpen || !level) return null
+  if (!isOpen || !user) return null
 
   const handleConfirm = () => {
-    onConfirm(level.uid)
+    onConfirm(user.uid)
   }
 
   return (
@@ -32,7 +33,7 @@ export const LevelDeleteModal = ({
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs animate-in fade-in duration-150"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="delete-level-title"
+      aria-labelledby="delete-user-title"
     >
       <div className="relative w-full max-w-md bg-eco-card border border-eco-border rounded-2xl p-6 shadow-2xl space-y-5 animate-in zoom-in-95 duration-150">
         {/* Cabecera con advertencia */}
@@ -42,8 +43,8 @@ export const LevelDeleteModal = ({
               <AlertTriangle size={20} />
             </div>
             <div>
-              <H3 id="delete-level-title" className="text-base font-bold text-eco-text">
-                Desactivar Nivel Educativo
+              <H3 id="delete-user-title" className="text-base font-bold text-eco-text">
+                Desactivar Usuario
               </H3>
               <span className="text-xs text-eco-muted font-body">
                 Confirmación de acción administrativa
@@ -62,22 +63,25 @@ export const LevelDeleteModal = ({
           </button>
         </div>
 
-        {/* Resumen del nivel afectado */}
+        {/* Tarjeta con los datos del usuario afectado */}
         <div className="bg-eco-bg/80 border border-eco-border rounded-xl p-4 flex items-center justify-between gap-3">
-          <div>
-            <span className="block font-heading font-bold text-sm text-eco-text">
-              {level.name}
-            </span>
-            <span className="block text-xs font-body text-eco-muted">
-              {level.gradeNumber}.° Grado
-            </span>
+          <div className="flex items-center gap-3 min-w-0">
+            <UserAvatar name={user.name} lastName={user.lastName} size="md" />
+            <div className="min-w-0">
+              <span className="block font-heading font-bold text-sm text-eco-text truncate">
+                {user.name} {user.lastName}
+              </span>
+              <span className="block text-xs font-body text-eco-muted truncate">
+                {user.email}
+              </span>
+            </div>
           </div>
-          <LevelStageBadge stage={level.stage} />
+          <UserRoleBadge role={user.role} />
         </div>
 
-        {/* Mensaje explicativo */}
+        {/* Mensaje explicativo del Soft Delete */}
         <p className="text-xs text-eco-muted font-body leading-relaxed">
-          Al desactivar este grado, no estará disponible para nuevas asignaciones de clases ni matrículas. Los registros históricos de alumnos y turnos asociados permanecerán intactos en la base de datos (Soft Delete).
+          Al desactivar esta cuenta, el usuario perderá de inmediato el acceso al sistema. Sus evidencias fotográficas, turnos y puntos acumulados se conservarán para fines de auditoría histórica.
         </p>
 
         {/* Botones de acción */}
@@ -107,4 +111,4 @@ export const LevelDeleteModal = ({
   )
 }
 
-export default LevelDeleteModal
+export default UserDeleteModal

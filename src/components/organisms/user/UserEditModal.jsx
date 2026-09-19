@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { X, ShieldAlert } from 'lucide-react'
-import { H3 } from '../atoms/Heading.jsx'
-import { Button } from '../atoms/Button.jsx'
-import { TextField } from '../molecules/TextField.jsx'
-import { SelectField } from '../molecules/SelectField.jsx'
+import { H3 } from '../../atoms/Heading.jsx'
+import { Button } from '../../atoms/Button.jsx'
+import { TextField } from '../../molecules/TextField.jsx'
+import { SelectField } from '../../molecules/SelectField.jsx'
 import {
   validateEditName,
   validateEditLastName,
@@ -124,6 +124,7 @@ export const UserEditModal = ({
               id="edit-name"
               label="Nombre"
               placeholder="Pepito"
+              required
               error={errors.name?.message}
               {...register('name', { validate: validateEditName })}
             />
@@ -132,6 +133,7 @@ export const UserEditModal = ({
               id="edit-lastName"
               label="Apellido"
               placeholder="Atunio"
+              required
               error={errors.lastName?.message}
               {...register('lastName', { validate: validateEditLastName })}
             />
@@ -168,7 +170,7 @@ export const UserEditModal = ({
             type="password"
             label="Nueva Contraseña"
             placeholder="Dejar en blanco para no modificar"
-            helperText="Opcional. Si se ingresa una contraseña, debe tener al menos 8 caracteres."
+            helperText="Opcional. Si se ingresa una contraseña, debe tener al menos 6 caracteres."
             error={errors.password?.message}
             {...register('password', { validate: validateEditPassword })}
           />

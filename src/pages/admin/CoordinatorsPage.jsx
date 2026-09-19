@@ -55,7 +55,7 @@ export const CoordinatorsPage = () => {
   ).size
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-200">
+    <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
       {/* 1. Encabezado principal y métricas (sin botones duplicados) */}
       <div className="bg-eco-card border border-eco-border rounded-2xl p-6 sm:p-8 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">

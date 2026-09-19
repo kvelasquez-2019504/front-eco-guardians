@@ -1,6 +1,6 @@
 import { AlertTriangle, X, Briefcase } from 'lucide-react'
-import { H3 } from '../atoms/Heading.jsx'
-import { Button } from '../atoms/Button.jsx'
+import { H3 } from '../../atoms/Heading.jsx'
+import { Button } from '../../atoms/Button.jsx'
 
 /**
  * Organismo: CareerDeleteModal

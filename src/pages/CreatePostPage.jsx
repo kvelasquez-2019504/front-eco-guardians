@@ -160,7 +160,7 @@ export const CreatePostPage = () => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-200">
+    <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
       {/* Botón Volver */}
       <button
         type="button"

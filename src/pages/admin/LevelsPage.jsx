@@ -2,10 +2,10 @@ import { School, BookOpen, GraduationCap } from 'lucide-react'
 import { useLevelsAdmin } from '@/shared/hooks/useLevelsAdmin.js'
 import { H1 } from '@/components/atoms/Heading.jsx'
 import { LevelFilterBar } from '@/components/molecules/LevelFilterBar.jsx'
-import { LevelsTable } from '@/components/organisms/LevelsTable.jsx'
-import { LevelCreateModal } from '@/components/organisms/LevelCreateModal.jsx'
-import { LevelEditModal } from '@/components/organisms/LevelEditModal.jsx'
-import { LevelDeleteModal } from '@/components/organisms/LevelDeleteModal.jsx'
+import { LevelsTable } from '@/components/organisms/level/LevelsTable.jsx'
+import { LevelCreateModal } from '@/components/organisms/level/LevelCreateModal.jsx'
+import { LevelEditModal } from '@/components/organisms/level/LevelEditModal.jsx'
+import { LevelDeleteModal } from '@/components/organisms/level/LevelDeleteModal.jsx'
 
 /**
  * Página: LevelsPage
@@ -50,7 +50,7 @@ export const LevelsPage = () => {
   const activeCount = rawLevels.filter((l) => l.status !== false).length
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-200">
+    <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
       {/* 1. Encabezado principal y métricas */}
       <div className="bg-eco-card border border-eco-border rounded-2xl p-6 sm:p-8 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">

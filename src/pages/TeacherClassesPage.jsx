@@ -146,7 +146,7 @@ export const TeacherClassesPage = () => {
   }, [classes])
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-200">
+    <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
       {/* 1. Encabezado principal y métricas */}
       <div className="bg-eco-card border border-eco-border rounded-2xl p-6 sm:p-8 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -243,10 +243,10 @@ export const TeacherClassesPage = () => {
           <div className="w-12 h-12 mx-auto p-3 bg-eco-bg text-eco-muted rounded-2xl border border-eco-border flex items-center justify-center">
             <BookOpen size={24} />
           </div>
-          <h3 className="font-heading font-bold text-base text-eco-text">
+          <h3 className="font-heading font-bold text-lg text-eco-text">
             No se encontraron clases asignadas
           </h3>
-          <p className="text-xs text-eco-muted font-body max-w-sm mx-auto">
+          <p className="text-sm text-eco-muted font-body max-w-sm mx-auto">
             No tienes materias asignadas actualmente o la búsqueda no arrojó resultados. Consulta con la coordinación académica si requieres asignaciones.
           </p>
         </div>

@@ -9,12 +9,28 @@ export const validateName = (name) => {
   if (!name || name.trim().length === 0) {
     return 'El nombre es requerido y no puede contener solo espacios.'
   }
+  const trimmed = name.trim()
+  if (trimmed.length < 2 || trimmed.length > 50) {
+    return 'El nombre debe tener entre 2 y 50 caracteres.'
+  }
+  const lettersOnlyRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/
+  if (!lettersOnlyRegex.test(trimmed)) {
+    return 'El nombre solo puede contener letras y espacios.'
+  }
   return true
 }
 
 export const validateLastName = (lastName) => {
   if (!lastName || lastName.trim().length === 0) {
     return 'El apellido es requerido y no puede contener solo espacios.'
+  }
+  const trimmed = lastName.trim()
+  if (trimmed.length < 2 || trimmed.length > 50) {
+    return 'El apellido debe tener entre 2 y 50 caracteres.'
+  }
+  const lettersOnlyRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/
+  if (!lettersOnlyRegex.test(trimmed)) {
+    return 'El apellido solo puede contener letras y espacios.'
   }
   return true
 }
@@ -59,38 +75,26 @@ export const validateConfirmPassword = (confirmPassword, originalPassword) => {
 
 /**
  * Validadores para edición administrativa de usuarios (PUT /user/:id)
- * Todos los campos son opcionales en el envío, pero si se proporcionan deben cumplir las reglas.
+ * Mantienen la misma coherencia de negocio y reglas que el alta de usuarios.
  */
 export const validateEditName = (name) => {
-  if (!name || name.trim().length === 0) return true
-  const trimmed = name.trim()
-  if (trimmed.length < 2 || trimmed.length > 50) {
-    return 'El nombre debe tener entre 2 y 50 caracteres.'
+  if (!name || name.trim().length === 0) {
+    return 'El nombre es requerido y no puede contener solo espacios.'
   }
-  const lettersOnlyRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/
-  if (!lettersOnlyRegex.test(trimmed)) {
-    return 'El nombre solo puede contener letras y espacios.'
-  }
-  return true
+  return validateName(name)
 }
 
 export const validateEditLastName = (lastName) => {
-  if (!lastName || lastName.trim().length === 0) return true
-  const trimmed = lastName.trim()
-  if (trimmed.length < 2 || trimmed.length > 50) {
-    return 'El apellido debe tener entre 2 y 50 caracteres.'
+  if (!lastName || lastName.trim().length === 0) {
+    return 'El apellido es requerido y no puede contener solo espacios.'
   }
-  const lettersOnlyRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/
-  if (!lettersOnlyRegex.test(trimmed)) {
-    return 'El apellido solo puede contener letras y espacios.'
-  }
-  return true
+  return validateLastName(lastName)
 }
 
 export const validateEditPassword = (password) => {
   if (!password || password.length === 0) return true
-  if (password.length < 8) {
-    return 'Si actualizas la contraseña, debe tener al menos 8 caracteres.'
+  if (password.length < 6) {
+    return 'Si actualizas la contraseña, debe tener al menos 6 caracteres.'
   }
   return true
 }

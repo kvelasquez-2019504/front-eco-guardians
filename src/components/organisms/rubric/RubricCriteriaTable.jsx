@@ -102,15 +102,15 @@ export const RubricCriteriaTable = ({
                     {/* B. Criterio Evaluable */}
                     <Td className="py-4 max-w-xs sm:max-w-md">
                       <div className="flex flex-col gap-1">
-                        <span className="font-heading font-bold text-sm text-eco-text leading-snug">
+                        <span className="font-heading font-bold text-md text-eco-text leading-snug">
                           {item.title}
                         </span>
                         {item.description ? (
-                          <p className="text-xs text-eco-muted font-body leading-relaxed line-clamp-2">
+                          <p className="text-sm text-eco-muted font-body leading-relaxed line-clamp-2">
                             {item.description}
                           </p>
                         ) : (
-                          <span className="text-[11px] text-eco-muted/70 italic font-body">
+                          <span className="text-[12px] text-eco-muted/70 italic font-body">
                             Sin descripción adicional
                           </span>
                         )}

@@ -48,6 +48,7 @@ export const ClassCreateModal = ({
     setValue,
     setError,
     clearErrors,
+    reset,
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
@@ -55,6 +56,18 @@ export const ClassCreateModal = ({
       academicYear: 2026,
     },
   })
+
+  const handleClose = () => {
+    setSelectedLevelId('')
+    setSelectedSection('')
+    setSelectedCareerId('')
+    setSelectedTeacherId('')
+    reset({
+      academicYear: 2026,
+    })
+    clearErrors()
+    onClose()
+  }
 
   // Nivel seleccionado actualmente
   const selectedLevel = useMemo(() => {
@@ -88,6 +101,7 @@ export const ClassCreateModal = ({
     const nextLevelId = e.target.value
     setSelectedLevelId(nextLevelId)
     setSelectedSection('')
+    setSelectedCareerId('')
     clearErrors('levelId')
     clearErrors('section')
     clearErrors('careerId')
@@ -158,7 +172,7 @@ export const ClassCreateModal = ({
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             disabled={loading}
             aria-label="Cerrar modal"
             className="text-eco-muted hover:text-eco-text p-2 rounded-xl hover:bg-eco-border/50 transition-colors"
@@ -348,7 +362,7 @@ export const ClassCreateModal = ({
               type="button"
               variant="secondary"
               size="md"
-              onClick={onClose}
+              onClick={handleClose}
               disabled={loading}
             >
               Cancelar

@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { X, UserPlus } from 'lucide-react'
-import { H3 } from '../atoms/Heading.jsx'
-import { Button } from '../atoms/Button.jsx'
-import { TextField } from '../molecules/TextField.jsx'
-import { SelectField } from '../molecules/SelectField.jsx'
+import { H3 } from '../../atoms/Heading.jsx'
+import { Button } from '../../atoms/Button.jsx'
+import { TextField } from '../../molecules/TextField.jsx'
+import { SelectField } from '../../molecules/SelectField.jsx'
 import {
   validateName,
   validateLastName,

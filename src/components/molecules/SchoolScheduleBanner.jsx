@@ -67,7 +67,7 @@ export const SchoolScheduleBanner = () => {
                 Horario Lectivo de Subida de Evidencias (Kinal UTC-6)
               </span>
               <span
-                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-heading font-extrabold border ${
+                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11.5px] font-heading font-extrabold border ${
                   scheduleStatus.isActive
                     ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
                     : 'bg-amber-500/15 text-amber-300 border-amber-500/30'
@@ -84,7 +84,7 @@ export const SchoolScheduleBanner = () => {
                 )}
               </span>
             </div>
-            <p className="text-[11px] text-eco-muted font-body mt-0.5">
+            <p className="text-[12px] text-eco-muted font-body mt-0.5">
               El backend valida que las publicaciones de alumnos ocurran durante las horas oficiales de clase.
             </p>
           </div>
@@ -104,20 +104,20 @@ export const SchoolScheduleBanner = () => {
         <div className="mt-3 pt-3 border-t border-eco-border/60 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs animate-in fade-in duration-150">
           <div className="p-2.5 bg-eco-bg/70 rounded-xl border border-eco-border">
             <span className="font-heading font-bold text-eco-cyan block">Ciclo Básico</span>
-            <span className="text-eco-text font-mono text-[11px] block mt-0.5">Lunes a Viernes</span>
-            <span className="text-eco-muted text-[11px]">07:00 a 13:15 hrs</span>
+            <span className="text-eco-text font-mono text-[12.5px] block mt-0.5">Lunes a Viernes</span>
+            <span className="text-eco-muted text-[12.5px]">07:00 a 13:15 hrs</span>
           </div>
 
           <div className="p-2.5 bg-eco-bg/70 rounded-xl border border-eco-border">
             <span className="font-heading font-bold text-amber-300 block">Diversificado (Matutina)</span>
-            <span className="text-eco-text font-mono text-[11px] block mt-0.5">Lunes a Viernes</span>
-            <span className="text-eco-muted text-[11px]">07:00 a 12:05 hrs</span>
+            <span className="text-eco-text font-mono text-[12.5px] block mt-0.5">Lunes a Viernes</span>
+            <span className="text-eco-muted text-[12.5px]">07:00 a 12:05 hrs</span>
           </div>
 
           <div className="p-2.5 bg-eco-bg/70 rounded-xl border border-eco-border">
             <span className="font-heading font-bold text-indigo-300 block">Diversificado (Vespertina)</span>
-            <span className="text-eco-text font-mono text-[11px] block mt-0.5">Lunes a Viernes</span>
-            <span className="text-eco-muted text-[11px]">12:40 a 17:40 hrs</span>
+            <span className="text-eco-text font-mono text-[12.5px] block mt-0.5">Lunes a Viernes</span>
+            <span className="text-eco-muted text-[12.5px]">12:40 a 17:40 hrs</span>
           </div>
         </div>
       )}

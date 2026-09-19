@@ -32,3 +32,42 @@ body {
   background-color: var(--color-eco-bg);
   color: var(--color-eco-text);
 }
+
+/* 
+  1. Estilos para Firefox 
+*/
+* {
+  scrollbar-width: thin; /* Hace la barra más delgada y elegante */
+  scrollbar-color: var(--color-eco-border) var(--color-eco-bg);
+}
+
+/* 
+  2. Estilos para navegadores basados en WebKit (Chrome, Edge, Safari, Opera) 
+*/
+
+/* Ancho y alto de la barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 10px; /* Scroll vertical */
+  height: 10px; /* Scroll horizontal */
+}
+
+/* El fondo (track) por donde se desliza la barra */
+::-webkit-scrollbar-track {
+  background: var(--color-eco-bg);
+  /* Un borde sutil para separar la barra del contenido de la página */
+  border-left: 1px solid var(--color-eco-card); 
+}
+
+/* La barra móvil (thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-eco-border);
+  border-radius: 8px;
+  /* El borde del mismo color que el track crea la ilusión de que la barra es más delgada y está flotando */
+  border: 2px solid var(--color-eco-bg); 
+}
+
+/* Efecto hover estilo Gaming / Tecnológico al pasar el ratón por la barra */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-eco-cyan);
+  /* También puedes cambiarlo a var(--color-eco-green) si prefieres que el acento sea ecológico */
+}
